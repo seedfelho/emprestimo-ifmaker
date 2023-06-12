@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .form-cadastro{
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+            border: 1px solid black;
+            margin-top: 10px;
+        }
+        .tabela{
+            border: 1px solid black;
+            min-width: 50vw;
+        }
+        .tabela thead{
+            background-color: #01318ac1;
+            color: white;
+        }
+        .tabela tbody{
+            background-color: #eee;
+            
+        }
+        .tabela, td, th{
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 15px 30px;
+            text-align: center;
+        }
+        tr:nth-child(even){
+            background-color: #f1efef;
+        }
+        body{
+            font: 1.4em sans-serif;
+        }
+        .excluir{
+            background-color: rgb(26, 67, 105);
+            text-decoration: none;
+            padding: 10px 20px;
+            color: white;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        .excluir:hover{
+            cursor: pointer;
+            background-color: rgb(72, 70, 177);
+        }
+        .alterar:hover{
+            cursor: pointer;
+            background-color: rgb(63, 62, 134);
+        }
+
+        .alterar{
+            background-color: rgb(31, 99, 161);
+            text-decoration: none;
+            padding: 10px 20px;
+            color: white;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        .input{
+            border: 1px solid rgb(0, 0, 0);
+            padding: 5px;
+            margin-bottom: 5px;
+
+        }          
+        .input:hover{
+            border-color: rgb(65, 56, 56);
+        }  
+        form{
+            border: 1px solid black;
+            padding: 50px;
+            margin-left: 15px;
+            background-color: rgb(152, 209, 235);
+            border-radius: 20px;
+        }
+        form button{
+            background-color: rgb(31, 99, 161);
+            text-decoration: none;
+            padding: 10px 20px;
+            color: white;
+            border-radius: 10px;
+            font-weight: bold;
+            height: 40px;
+            width: 100px;
+            margin-top: 10px;
+            align-self: center;
+        }
+        form button:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Listando pessoas</h1>
+    <table class="tabela" id="tabela">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>Excluir</th>
+                <th>Alterar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--  lista  api-->
+        </tbody>
+    </table>
+
+
+    
+    <form class="form-cadastro" id="form-cadastro">
+        <label for="id">id</label>
+        <input type="text" name="id" id="id">
+
+        <label for="nome">nome</label>
+        <input type="text" name="nome" id="nome">
+        
+        <label for="idade">idade</label>
+        <input type="text" name="idade" id="idade">
+        
+        <button type="submit">Enviar</button>
+    </form>
+
+    
+    <script>
+        const url = "http://localhost:3000/pessoas";
+
+        fetch(url)
+            .then(resposta=>resposta.json())
+            .then(data=>{
+                const tabela = document.querySelector('#tabela');
+                for(let i=0; i<data.length;i++){
+                    let tr = document.createElement('tr')
+                    let tdId = document.createElement('td')
+                    let tdNome = document.createElement('td')
+                    let tdIdade = document.createElement('td')
+                    let tdBotaoExcluir = document.createElement('td')
+                    let aExcluir = document.createElement('a')
+                    let tdBotaoAlterar = document.createElement('td')
+                    let aAlterar = document.createElement('a')
+                    tdId.textContent = data[i].id
+                    tdNome.textContent = data[i].nome
+                    tdIdade.textContent = data[i].idade
+                    aExcluir.textContent = "Excluir"
+                    aExcluir.classList.add('excluir')
+                    aAlterar.textContent = "Alterar"
+                    aAlterar.classList.add('excluir')
+
+                    aExcluir.addEventListener('click', (event)=>{
+                        event.preventDefault();
+                        fetch(`${url}/${data[i].id}`,{
+                            method: 'DELETE'
+
+                        })
+                        .finally(()=>{
+                            // window.location.reload()
+                        })
+                    }) 
+                    
+                    aAlterar.addEventListener('click', ()=>{
+                        document.querySelector("#id").value = data[i].id
+                        document.querySelector("#nome").value = data[i].nome
+                        document.querySelector("#idade").value = data[i].idade
+                        document.querySelector("button").textContent = "Alterar"
+                        let form = document.querySelector("#form-cadastro")
+                        console.log(form)
+                        form.addEventListener("submit", (event)=>{
+                           let id = document.querySelector("#id").value
+                           let nome = document.querySelector("#nome").value
+                           let idade = document.querySelector("#idade").value
+
+                           let pessoa = {
+                                id,
+                                nome,
+                                idade
+                            }
+                            fetch(url+'/'+data[i].id,{
+                                method: 'PUT',
+                                headers:{
+                                    'Content-Type':'application/json'
+                                },
+                                body: JSON.stringify(pessoa)
+                            })
+                            .then(response => response.json())
+                            .finally(()=> window.location.reload());
+                        })
+
+                    })
+
+                    
+                    tr.appendChild(tdId)
+                    tr.appendChild(tdNome)
+                    tr.appendChild(tdIdade)
+                    tr.appendChild(tdBotaoExcluir)
+                    tr.appendChild(tdBotaoAlterar)
+                    tdBotaoExcluir.appendChild(aExcluir)
+                    tdBotaoAlterar.appendChild(aAlterar)
+                    
+
+                    tabela.appendChild(tr)
+                }
+
+
+        });
+
+        let formJS = document.querySelector("#form-cadastro")
+        //console.log(formJS)
+        formJS.addEventListener('submit',(event)=>{
+            event.preventDefault()
+            let button = document.querySelector('button')
+            if(button.textContent == 'Alterar'){
+                return
+            }
+            //console.log("cliquei no botão")
+            //O que fazer agora?
+            //passo 1: pegar as informaçõs dos inputs
+            let id = document.querySelector("#id").value
+            let nome = document.querySelector("#nome").value
+            let idade = document.querySelector("#idade").value
+            
+            //passo 2: enviar informações
+            //O que a gente usa para enviar?
+            let pessoa = {
+                id,
+                nome,
+                idade
+            }
+            fetch(url,{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify(pessoa)
+            })
+            .then(response=>response.json())
+        })
+        
+    </script>
+</body>
+</html>
