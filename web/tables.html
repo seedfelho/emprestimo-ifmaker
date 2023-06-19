@@ -314,7 +314,9 @@
                                 body: JSON.stringify(pessoa)
                             })
                             .then(response => response.json())
-                            .finally(()=>{/*window.location.reload()*/});
+                            .finally(()=>
+                            window.location.reload()
+                            );
                         })
 
                     })
@@ -358,7 +360,9 @@
                 body: JSON.stringify(pessoa)
             })
             .then(response=>response.json())
-            .finally(()=>window.location.reload())
+            .finally(()=>{
+                    window.location.reload()
+                });
         })
 
 //          //ITENS!
