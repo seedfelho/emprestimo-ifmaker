@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font: 1.2em cursive;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #0B2C4D;   
+        }
+        .excluir{
+            border-radius: 15px;
+            background-color: transparent;
+            text-decoration: none;
+            padding: 10px 20px;
+            color: #134980;
+            font-weight: bold;
+            transition: 1s;
+        }
+        .excluir:hover{
+            box-shadow: #fff 0px 0px 10px;
+            background-color: #fff;
+            color: #ff0000;
+            transition: 1s;
+        }
+        .form-cadastro{
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+        }
+        .form-itens{
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+        }
+        .form-emprestimo{
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+        }
+        .tabela{
+            border: 1px solid black;
+            min-width: 50vw;
+        }
+        .tabela thead{
+            background-color: #134980;
+            color: white;
+        }
+        .tabela tbody{
+            background-color: #eee;
+        }
+        .tabela, td, th{
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 15px 30px;
+            text-align: center;
+        }
+        tr:nth-child(even){
+         background-color: #e3f4ff;
+        }
+        input{
+            border: 1px solid rgb(0, 0, 0);
+            padding: 5px;
+            margin-bottom: 20px;
+        }
+        
+        input:focus-visible{
+            outline-color:rgba(158, 210, 245, 0.639);
+        }
+        form{
+            color: white;
+            border: 3px solid #134980;
+            border-radius: 10px;
+            padding: 50px;
+            margin-top: 30px;
+            background-color:#5B83A6;
+            width: 50px;
+        }
+        form button{
+            width: 80px;
+            border-radius: 5px;
+            height: 30px;
+            background-color: #134980;
+            color: #eee;
+            border: 1px solid #eee;
+
+        }
+        #cpf{
+       border: none;
+       border-radius: 5px;
+       height: 23px;
+        }
+        #pessoas_cpf{
+       border: none;
+       border-radius: 5px;
+       height: 23px;
+        }
+        #id{
+       border: none;
+       border-radius: 5px;
+       height: 23px;
+        }
+        #itens_id{
+       border: none;
+       border-radius: 5px;
+       height: 23px;
+        }
+        #nome1{
+       border: none;
+       border-radius: 5px;
+       height: 23px;
+        }
+        #nome2{
+       border: none;
+       border-radius: 5px;
+       height: 23px;
+        }
+        #email{
+       border: none;
+       border-radius: 5px;
+       height: 23px;
+        }
+        #tele{
+       border: none;
+       border-radius: 5px;
+       height: 23px;
+        }
+        #nomeI{
+       border: none;
+       border-radius: 5px;
+       height: 23px;
+        }
+        #nomeP{
+       border: none;
+       border-radius: 5px;
+       height: 23px;
+        }
+        #dataE{
+       border: none;
+       border-radius: 5px;
+       height: 23px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cadastro!</h1>
+    <table class="tabela" id="tabela">
+        <thead>
+            <tr>
+                <th>CPF</th>
+                <th>NOME</th>
+                <th>EMAIL</th>
+                <th>TELEFONE</th>
+                <th>EXCLUIR</th>
+                <th>ALTERAR</th>
+            </tr>
+        </thead>
+        <tbody>
+           <!--lista api-->
+        </tbody>
+    </table>
+    
+    <form class="form-cadastro" id="form-cadastro">
+        <label for="cpf">CPF</label>
+        <input type="text" name="cpf" id="cpf">
+
+        <label for="nome1">NOME</label>
+        <input type="text" name="nome1" id="nome1">
+        
+        <label for="email">EMAIL</label>
+        <input type="text" name="email" id="email">
+
+        <label for="tele">TELEFONE</label>
+        <input type="text" name="tele" id="tele">
+        
+        <button type="submit">ENVIAR</button>
+    </form>
+
+    <h1>Itens!</h1>
+    <table class="tabela" id="tabela2">
+        <thead>
+            <tr>
+            <th>ID</th>
+            <th>NOME DO ITEM</th>
+            <th>EXCLUIR</th>
+            <th>ALTERAR</th>
+        </tr>
+        </thead>
+        <tbody>
+           <!--lista api-->
+        </tbody>
+    </table>
+    
+    <form class="form-itens" id="form-itens">
+        <label for="id">ID</label>
+        <input type="text" name="id" id="id">
+
+        <label for="nome2">NOME</label>
+        <input type="text" name="nome2" id="nome2">
+        
+        <button id="button2" type="submit">ENVIAR</button>
+    </form>
+
+    <h1>Emprestimo!</h1>
+    <table class="tabela" id="tabela3">
+        <thead>
+            <tr>
+            <th>ID</th>
+            <th>ID ITEM</th>
+            <th>NOME ITEM</th>
+            <th>CPF</th>
+            <th>NOME APESSOA</th>
+            <th>DATA EMPRESTIMO</th>
+            <th>EXCLUIR</th>
+            <th>ALTERAR</th>
+        </tr>
+        </thead>
+        <tbody>
+           <!--lista api-->
+        </tbody>
+    </table>
+    
+    <form class="form-emprestimo" id="form-emprestimo">
+        <!-- <label for="id2">ID</label>-->
+        <input type="hidden" name="id2" id="id2">
+        <label for="itens_id">ID ITEM</label>
+        <input type="text" name="itens_id" id="itens_id">
+
+        <label for="nomeI">NOME DO ITEM</label>
+        <input type="text" name="nomeI" id="nomeI">
+        
+        <label for="pessoas_cpf">CPF</label>
+        <input type="text" name="pessoas_cpf" id="pessoas_cpf">
+
+        <label for="nomeP">NOME DA PESSOA</label>
+        <input type="text" name="nomeP" id="nomeP">
+
+        <label for="dataE">DATA DO EMPRESTIMO</label>
+        <input type="text" name="dataE" id="dataE">
+        
+        <button id="button3" type="submit">ENVIAR</button>
+    </form>
+
+    
+    <script>
+          const url = "http://localhost:3000/pessoas";
+
+        fetch(url)
+            .then(resposta=>resposta.json())
+            .then(data=>{
+                const tabela = document.querySelector('#tabela');
+                for(let i=0; i<data.length;i++){
+                    let tr = document.createElement('tr')
+                    let tdCpf = document.createElement('td')
+                    let tdNome = document.createElement('td')
+                    let tdEmail = document.createElement('td')
+                    let tdTelefone = document.createElement('td')
+                    let tdBotaoExcluir = document.createElement('td')
+                    let tdBotaoAlterar = document.createElement('td')
+                    let aExcluir = document.createElement('a')
+                    let aAlterar = document.createElement('a')
+                    tdCpf.textContent = data[i].cpf
+                    tdNome.textContent = data[i].nome
+                    tdEmail.textContent = data[i].email
+                    tdTelefone.textContent = data[i].telefone
+
+                    aExcluir.textContent = "Excluir"
+                    aAlterar.textContent = "Alterar"
+                    aExcluir.classList.add('excluir')
+                    aAlterar.classList.add('excluir')
+
+                    aExcluir.addEventListener('click',(event)=>{
+                        event.preventDefault();
+                        fetch(`${url}/${data[i].cpf}`,{
+                            method: 'DELETE'
+                        })
+                        .finally(()=>{
+                            // {/*window.location.reload()*/}
+                        });
+                    })
+                    
+                    aAlterar.addEventListener('click',()=>{
+                        document.querySelector("#cpf").value = data[i].cpf
+                        document.querySelector("#nome1").value = data[i].nome
+                        document.querySelector("#email").value = data[i].email
+                        document.querySelector("#tele").value = data[i].telefone
+                        document.querySelector("button").textContent = "Alterar"
+                        let form = document.querySelector("#form-cadastro")
+                        form.addEventListener("submit",(event)=>{
+                            
+                            let cpf = document.querySelector("#cpf").value
+                            let nome = document.querySelector("#nome1").value 
+                            let email = document.querySelector("#email").value
+                            let telefone = document.querySelector("#tele").value
+                            let pessoa = {
+                                cpf,
+                                nome,
+                                email,
+                                telefone
+                            }
+                            console.log(pessoa)
+                            
+                            fetch(url+'/'+data[i].cpf,{
+                                method: 'PUT',
+                                headers:{
+                                    'Content-Type':'application/json'
+                                },
+                                body: JSON.stringify(pessoa)
+                            })
+                            .then(response => response.json())
+                            .finally(()=>{/*window.location.reload()*/});
+                        })
+
+                    })
+                    
+                    tdBotaoExcluir.appendChild(aExcluir)
+                    tdBotaoAlterar.appendChild(aAlterar)                    
+                    tr.appendChild(tdCpf)
+                    tr.appendChild(tdNome)
+                    tr.appendChild(tdEmail)
+                    tr.appendChild(tdTelefone)
+                    tr.appendChild(tdBotaoExcluir)
+                    tr.appendChild(tdBotaoAlterar)
+
+                    tabela.appendChild(tr)
+                }
+        });
+
+        let formJS = document.querySelector("#form-cadastro")
+        formJS.addEventListener('submit',(event)=>{
+            event.preventDefault()
+            let button = document.querySelector('button')
+            if(button.textContent == 'Alterar'){
+                return
+            }
+
+            let cpf = document.querySelector("#cpf").value
+            let nome = document.querySelector("#nome1").value 
+            let email = document.querySelector("#email").value
+            let telefone = document.querySelector("#tele").value
+            let pessoa = {
+             cpf,
+             nome,
+             email,
+             telefone
+            }
+            fetch(url,{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify(pessoa)
+            })
+            .then(response=>response.json())
+            .finally(()=>window.location.reload())
+        })
+
+//          //ITENS!
+
+         const url2 = "http://localhost:3000/itens";
+
+fetch(url2)
+    .then(resposta=>resposta.json())
+    .then(data=>{
+        const tabela = document.querySelector('#tabela2');
+        for(let i=0; i<data.length;i++){
+            let tr = document.createElement('tr')
+            let tdId = document.createElement('td')
+            let tdNome = document.createElement('td')
+            let tdBotaoExcluir = document.createElement('td')
+            let tdBotaoAlterar = document.createElement('td')
+            let aExcluir = document.createElement('a')
+            let aAlterar = document.createElement('a')
+            tdId.textContent = data[i].id
+            tdNome.textContent = data[i].nome
+            
+            aExcluir.textContent = "Excluir"
+            aAlterar.textContent = "Alterar"
+            aExcluir.classList.add('excluir')
+            aAlterar.classList.add('excluir')
+
+            aExcluir.addEventListener('click',(event)=>{
+                event.preventDefault();
+                fetch(`${url2}/${data[i].id}`,{
+                    method: 'DELETE'
+                })
+                .finally(()=>{
+                    window.location.reload()
+                });
+            })
+            
+            aAlterar.addEventListener('click',()=>{
+                document.querySelector("#id").value = data[i].id
+                document.querySelector("#nome2").value = data[i].nome
+                document.querySelector("#button2").textContent = "Alterar"
+                let form = document.querySelector("#form-itens")
+                form.addEventListener("submit",(event)=>{
+                    let id = document.querySelector("#id").value
+                    let nome = document.querySelector("#nome2").value
+                    let item = {
+                        id,
+                        nome
+                    }
+                    
+                    fetch(url2+'/'+data[i].id,{
+                        method: 'PUT',
+                        headers:{
+                            'Content-Type':'application/json'
+                        },
+                        body: JSON.stringify(item)
+                    })
+                    .then(response => response.json())
+                    .finally(()=>window.location.reload());
+                })
+
+            })
+            
+            tdBotaoExcluir.appendChild(aExcluir)
+            tdBotaoAlterar.appendChild(aAlterar)                    
+            tr.appendChild(tdId)
+            tr.appendChild(tdNome)
+            tr.appendChild(tdBotaoExcluir)
+            tr.appendChild(tdBotaoAlterar)
+
+            tabela.appendChild(tr)
+        }
+});
+
+let formJS2 = document.querySelector("#form-itens")
+formJS2.addEventListener('submit',(event)=>{
+    event.preventDefault()
+    let button = document.querySelector('#button2')
+    if(button.textContent == 'Alterar'){
+        return
+    }
+    
+    let id = document.querySelector("#id").value
+    let nome = document.querySelector("#nome2").value
+    let item = {
+        id,
+        nome
+    }
+    fetch(url2,{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify(item)
+    })
+    .then(response=>response.json())
+    .finally(()=>window.location.reload())
+})
+
+//  //EMPRESTIMO!///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ const url3 = "http://localhost:3000/emprestimo";
+
+fetch(url3)
+    .then(resposta=>resposta.json())
+    .then(data=>{
+        const tabela = document.querySelector('#tabela3');
+        for(let i=0; i<data.length;i++){
+            let tr = document.createElement('tr')
+            let tdid2 = document.createElement('td')
+            let tditens_id = document.createElement('td')
+            let tdnomeI = document.createElement('td')
+            let tdpessoas_cpf = document.createElement('td')
+            let tdnomeP = document.createElement('td')
+            let tddataE = document.createElement('td')
+            let tdBotaoExcluir = document.createElement('td')
+            let tdBotaoAlterar = document.createElement('td')
+            let aExcluir = document.createElement('a')
+            let aAlterar = document.createElement('a')
+            tdid2.textContent = data[i].id2
+            tditens_id.textContent = data[i].itens_id
+            tdpessoas_cpf.textContent = data[i].pessoas_cpf
+            tdnomeI.textContent = data[i].nomeI
+            tdnomeP.textContent = data[i].nomeP
+            tddataE.textContent = data[i].dataE
+
+            
+            aExcluir.textContent = "Excluir"
+            aAlterar.textContent = "Alterar"
+            aExcluir.classList.add('excluir')
+            aAlterar.classList.add('excluir')
+
+            aExcluir.addEventListener('click',(event)=>{
+                event.preventDefault();
+                fetch(`${url3}/${data[i].id2}`,{
+                    method: 'DELETE'
+                })
+                .finally(()=>{
+                     window.location.reload()
+                });
+            })
+            
+            aAlterar.addEventListener('click',()=>{
+                document.querySelector("#id2").value = data[i].id2
+                document.querySelector("#itens_id").value = data[i].itens_id
+                document.querySelector("#nomeI").value = data[i].nomeI
+                document.querySelector("#pessoas_cpf").value = data[i].pessoas_cpf
+                document.querySelector("#nomeP").value = data[i].nomeP
+                document.querySelector("#dataE").value = data[i].dataE
+                document.querySelector("#button3").textContent = "ALTERAR"
+                let form= document.querySelector("#form-emprestimo")
+                form.addEventListener("submit",(event)=>{
+                    let id2 = document.querySelector("#id2").value
+                    let itens_id = document.querySelector("#itens_id").value
+                    let nomeI = document.querySelector("#nomeI").value
+                    let cpf = document.querySelector("#pessoas_cpf").value 
+                    let nomeP = document.querySelector("#nomeP").value 
+                    let data = document.querySelector("#dataE").value 
+                    let emprestimo = {
+                        id2,
+                        itens_id,
+                        nomeI,
+                        cpf,
+                        nomeP,
+                        data
+                    }
+                    fetch(url3+'/'+data[i].id2,{
+                        method: 'PUT',
+                        headers:{
+                            'Content-Type':'application/json'
+                        },
+                        body: JSON.stringify(emprestimo)
+                    })
+                    .then(response => response.json())
+                    .finally(()=>window.location.reload());
+                })
+
+            })
+            
+            tdBotaoExcluir.appendChild(aExcluir)
+            tdBotaoAlterar.appendChild(aAlterar)
+            tr.appendChild(tdid2)
+            tr.appendChild(tditens_id)                    
+            tr.appendChild(tdnomeI)
+            tr.appendChild(tdpessoas_cpf)
+            tr.appendChild(tdnomeP)
+            tr.appendChild(tddataE)
+            tr.appendChild(tdBotaoExcluir)
+            tr.appendChild(tdBotaoAlterar)
+
+            tabela.appendChild(tr)
+        }
+});
+
+let formJS3 = document.querySelector("#form-emprestimo")
+formJS3.addEventListener('submit',(event)=>{
+    event.preventDefault()
+    let button = document.querySelector('button')
+    if(button.textContent == 'Alterar'){
+        return
+    }
+    let itens_id = document.querySelector("#itens_id").value
+    let nomeI = document.querySelector("#nomeI").value
+    let cpf = document.querySelector("#pessoas_cpf").value
+    let nomeP = document.querySelector("#nomeP").value
+    let data = document.querySelector("#dataE").value
+    let emprestimo = {
+      itens_id,
+      nomeI,
+      cpf,
+      nomeP,
+      data
+        }
+    fetch(url3,{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify(emprestimo)
+    })
+    .then(response=>response.json())
+})
+
+    </script>
+ </body>
+ </html>
